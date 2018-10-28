@@ -3,4 +3,10 @@
     <string name="qpi_label">YOUR QPI</string>
     <string name="letter_label">Letter Grade</string>
     <string name="units_label">No. of Units</string>
+    <string name="target_qpi_label">TARGET QPI CALCULATOR</string>
+    <string name="min_qpi_label">MIN REQUIRED QPI</string>
+    <string name="target_qpi_textbox">Target Cummulative QPI</string>
+    <string name="units_left_textbox">Units Left to Take</string>
+    <string name="qpi_placeholder">0.00</string>
+    <string name="copyright">© AJcentAngle</string>
 </resources>

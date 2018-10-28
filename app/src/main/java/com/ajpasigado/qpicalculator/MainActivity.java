@@ -1,29 +1,20 @@
 package com.ajpasigado.qpicalculator;
 
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.SearchView;
 import android.widget.Space;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-
+import android.animation.ValueAnimator;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,10 +25,71 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Make to run your application only in portrait mode
+
+
+
+        TextView desired_qpi_tx = findViewById(R.id.desired_QPI_TXBX);
+        TextView units_tx = findViewById(R.id.units_left_TXBX);
+
+        desired_qpi_tx.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                refreshCumulative();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        units_tx.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                refreshCumulative();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
-    public void rowClick (View v){
-        //
+    public void refreshCumulative(){
+        TextView desired_qpi_tx = findViewById(R.id.desired_QPI_TXBX);
+        TextView units_tx = findViewById(R.id.units_left_TXBX);
+        TextView minimum_lbl = findViewById(R.id.minimum_required_LBL);
+        Double temp;
+
+        try
+        {
+            temp = cm.getMinRequired(Double.parseDouble(desired_qpi_tx.getText().toString()), Double.parseDouble(units_tx.getText().toString()));
+        }
+        catch(NumberFormatException e)
+        {
+            temp = -1.0;
+        }
+
+        if (temp > 4 || temp < 0){
+            minimum_lbl.setText("=(");
+        } else if ( minimum_lbl.getText().toString() != "=("){
+            animate(minimum_lbl, minimum_lbl.getText().toString(), String.format("%.2f", temp));
+        } else {
+            animate(minimum_lbl, "0.0", String.format("%.2f", temp));
+        }
     }
 
     public void addRowClick (View v){
@@ -45,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addRows(){
+        cm.getMinRequired(2.0,2.0);
         LinearLayout list = findViewById(R.id.main_list);
         LinearLayout vertList = new LinearLayout(this);
         vertList.setVerticalGravity(1);
@@ -52,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         int width1 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
         int width2 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 65, getResources().getDisplayMetrics());
-        int width3 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
+        int width3 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
 
         Space sp1 = new Space(this);
@@ -90,14 +143,16 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray2);
         spinner2.setAdapter(spinnerArrayAdapter2);
         spinner2.setId(count+2);
+        spinner2.setSelection(3);
 
         spinner1.setOnItemSelectedListener(getOnSpinnerClick(spinner1, spinner2));
         spinner2.setOnItemSelectedListener(getOnSpinnerClick(spinner1, spinner2));
 
         Button btn = new Button(this);
-        btn.setText("-");
         btn.setOnClickListener(getOnButtonClick(count, vertList, list));
         btn.setId(count+3);
+        btn.setBackground(getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel));
+        btn.setMaxHeight(10);
 
         count += 100;
 
@@ -118,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 list.removeView(vert);
                 cm.removeData(count);
                 refreshData();
+                refreshCumulative();
             }
         };
     }
@@ -126,8 +182,11 @@ public class MainActivity extends AppCompatActivity {
         return new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 int a = spin1.getId();
-                cm.addData(a - 1, getEquivalent(spin1.getSelectedItem().toString()), Double.parseDouble(spin2.getSelectedItem().toString()));
+                if (spin1.getSelectedItem().toString() != "-" && spin2.getSelectedItem().toString() != "-") {
+                    cm.addData(a - 1, getEquivalent(spin1.getSelectedItem().toString()), Double.parseDouble(spin2.getSelectedItem().toString()));
+                }
                 refreshData();
+                refreshCumulative();
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -139,9 +198,9 @@ public class MainActivity extends AppCompatActivity {
 
     void refreshData(){
         cm.calculateData();
-        TextView tv = findViewById(R.id.total_label);
+        TextView tv = findViewById(R.id.your_qpi_LBL);
         Double ans = cm.getTotalUnits() != 0 ?  (cm.getTotalQPI()/cm.getTotalUnits()) : 0.0;
-        tv.setText(String.format("%.2f", ans));
+        animate(tv, tv.getText().toString(), String.format("%.2f", ans));
     }
 
     Double getEquivalent(String a){
@@ -160,5 +219,16 @@ public class MainActivity extends AppCompatActivity {
                 return 1.0;
             default: return 0.0;
         }
+    }
+
+    private void animate(final TextView textview, String start, String end){
+        ValueAnimator animator = ValueAnimator.ofFloat(Float.parseFloat(start), Float.parseFloat(end));
+        animator.setDuration(300);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                textview.setText( String.format("%.2f", animation.getAnimatedValue()));
+            }
+        });
+        animator.start();
     }
 }

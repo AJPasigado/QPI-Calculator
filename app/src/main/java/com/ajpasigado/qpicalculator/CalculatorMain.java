@@ -1,5 +1,7 @@
 package com.ajpasigado.qpicalculator;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,5 +44,13 @@ public class CalculatorMain {
         }
         totalUnits = totalU;
         totalQPI = total;
+    }
+
+    public double getMinRequired(Double desired, Double unitsLeft){
+        Double tempUnits = totalUnits;
+        Double tempQPI = totalQPI;
+        Double answer = ((desired * (tempUnits + unitsLeft)) - tempQPI) / unitsLeft;
+
+        return answer;
     }
 }
