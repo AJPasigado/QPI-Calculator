@@ -6,8 +6,8 @@ android {
         applicationId "com.ajpasigado.qpicalculator"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,4 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
 }

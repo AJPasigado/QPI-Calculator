@@ -5,11 +5,13 @@
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
     android:gravity="bottom"
     app:umanoPanelHeight="150dp"
     tools:context="com.ajpasigado.qpicalculator.MainActivity">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
@@ -18,9 +20,9 @@
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,28 +48,16 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/main_table"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/grades_rview"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="30dp"
-            android:scrollbarStyle="insideInset"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-            <LinearLayout
-                android:id="@+id/main_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </ScrollView>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -91,7 +81,6 @@
                 android:clickable="true"
                 android:focusable="auto"
                 android:focusableInTouchMode="true"
-                android:onClick="addRowClick"
                 android:tint="@color/colorPrimary"
                 app:backgroundTint="@android:color/white"
                 app:borderWidth="0dp"
@@ -100,6 +89,23 @@
                 app:useCompatPadding="true" />
 
         </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/main_table"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbarStyle="insideInset"
+            tools:layout_editor_absoluteX="376dp"
+            tools:layout_editor_absoluteY="720dp">
+
+            <LinearLayout
+                android:id="@+id/main_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </ScrollView>
 
     </android.support.constraint.ConstraintLayout>
 

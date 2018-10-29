@@ -9,4 +9,5 @@
     <string name="units_left_textbox">Units Left to Take</string>
     <string name="qpi_placeholder">0.00</string>
     <string name="copyright">© AJcentAngle</string>
+    <string name="remove">REMOVE</string>
 </resources>
