@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="excluded_subjects">
+        <item>NATIONAL SERVICE TRAINING PROGRAM 2</item>
+        <item>NATIONAL SERVICE TRAINING PROGRAM 1</item>
+        <item>FIRST YEAR DEVELOPMENT PROGRAM</item>
+    </string-array>
+    <string-array
+        name="number_of_units">
+        <item>9</item>
+        <item>6</item>
+        <item>5</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+    </string-array>
+    <array name="letter_grades">
+        <item>A</item>
+        <item>B+</item>
+        <item>B</item>
+        <item>C+</item>
+        <item>C</item>
+        <item>D</item>
+        <item>F/FD</item>
+    </array>
+</resources>

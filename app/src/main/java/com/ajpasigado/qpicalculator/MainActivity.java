@@ -14,8 +14,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements GradesRecyclerIte
                 totalUnits += 3;
 
                 refreshRecyclerView();
-                refreshData();
+            //    refreshData();
             }
         });
 
@@ -253,9 +255,11 @@ public class MainActivity extends AppCompatActivity implements GradesRecyclerIte
 
     public void refreshRecyclerView(){
         grades_recycler_view = findViewById(R.id.grades_rview);
-        grades_adapter = new GradesAdapter(this, grades, this);
+        grades_adapter = new GradesAdapter(this, this.grades, this);
         grades_recycler_view.setAdapter(grades_adapter);
+
         grades_recycler_view.setLayoutManager(new LinearLayoutManager(this));
+
         grades_recycler_view.setItemAnimator(new DefaultItemAnimator());
 
         //Go to the last entry
@@ -283,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements GradesRecyclerIte
 
         if (temp > 4 || temp < 0){
             minimum_lbl.setText("n/a");
-        } else if ( minimum_lbl.getText().toString().equals("n/a")){
+        } else if ( minimum_lbl.getText().toString() != "n/a"){
             animate(minimum_lbl, minimum_lbl.getText().toString(), String.format("%.2f", temp));
         } else {
             animate(minimum_lbl, "0.00", String.format("%.2f", temp));

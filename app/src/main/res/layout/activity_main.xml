@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:gravity="bottom"
     app:umanoInitialState="hidden"
-    app:umanoPanelHeight="160dp"
-    tools:context="com.ajpasigado.qpicalculator.MainActivity">
+    app:umanoPanelHeight="160dp">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -20,8 +19,8 @@
             android:id="@+id/main_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="fill_vertical|fill_horizontal"
-            android:gravity="fill_vertical|fill_horizontal|center">
+            android:layout_gravity="fill"
+            android:gravity="fill">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/grades_rview"
@@ -76,7 +75,7 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -154,9 +153,9 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/clear_all_BTN"
-            android:layout_width="41dp"
-            android:layout_height="49dp"
-            android:layout_gravity="top|right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right|center_vertical|center_horizontal|center"
             android:layout_weight="1"
             android:alpha="0"
             android:clickable="true"
@@ -166,7 +165,7 @@
             app:backgroundTintMode="src_over"
             app:borderWidth="0dp"
             app:elevation="0dp"
-            app:layout_anchor="@id/addRow"
+            app:layout_anchor="@+id/addRow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/addRow"
             app:rippleColor="@color/cardview_dark_background"
@@ -177,26 +176,22 @@
             android:id="@+id/addRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|right|center_vertical|center_horizontal|center"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="auto"
-            android:tint="@color/ic_launcher_background"
+            android:tint="@color/colorPrimaryDark"
             app:backgroundTint="@color/colorAccent"
-            app:backgroundTintMode="src_over"
             app:borderWidth="0dp"
             app:elevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="@color/colorPrimaryDark"
+            app:rippleColor="@color/colorPrimary"
             app:srcCompat="@android:drawable/ic_input_add"
             app:useCompatPadding="true" />
-
     </android.support.design.widget.CoordinatorLayout>
 
-    <include layout="@layout/target_calculator"></include>
+    <include layout="@layout/target_calculator" />
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
-
-

@@ -1,25 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">QPI Calculator</string>
-    <string name="qpi_label">YOUR QPI</string>
-    <string name="letter_label">Letter Grade</string>
-    <string name="units_label">No. of Units</string>
-    <string name="target_qpi_label">TARGET QPI CALCULATOR</string>
-    <string name="min_qpi_label">MIN REQUIRED QPI</string>
-    <string name="target_qpi_textbox">Target Cumulative QPI</string>
-    <string name="units_left_textbox">Units Left to Take</string>
-    <string name="qpi_placeholder">0.00</string>
+    <string name="about">ABOUT</string>
     <string name="copyright">© AJcentAngle</string>
-    <string name="remove">REMOVE</string>
-    <string name="title_activity_introduction">Introduction</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY CONTENT</string>
-    <string name="main_page_hint">CLICK THE "+" \nTO START ADDING</string>
-    <string name="tutorial">TUTORIAL</string>
+    <string name="letter_label">Letter Grade</string>
     <string name="load_from_sis">LOAD FROM SIS</string>
-    <string name="about">ABOUT</string>
+    <string name="main_page_hint">CLICK THE + \nTO START ADDING</string>
+    <string name="min_qpi_label">MIN REQUIRED QPI</string>
+    <string name="qpi_label">YOUR QPI</string>
+    <string name="qpi_placeholder">0.00</string>
+    <string name="remove">REMOVE</string>
+    <string name="search_menu_title">Search</string>
+    <string name="sis_password">Password</string>
+    <string name="sis_please">Please log-in with your AdDUnet credentials.</string>
     <string name="sis_school">Ateneo de Davao University</string>
     <string name="sis_title">STUDENT INFORMATION SYSTEM</string>
-    <string name="sis_please">Please log-in with your AdDUnet credentials.</string>
     <string name="sis_username">Username</string>
-    <string name="sis_password">Password</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="target_qpi_label">TARGET QPI CALCULATOR</string>
+    <string name="target_qpi_textbox">Target Cumulative QPI</string>
+    <string name="title_activity_introduction">Introduction</string>
+    <string name="tutorial">TUTORIAL</string>
+    <string name="units_label">No. of Units</string>
+    <string name="units_left_textbox">Units Left to Take</string>
 </resources>
